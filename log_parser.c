@@ -1,122 +1,245 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+#include "log_common.h"
 
-typedef struct {
-    char ip[16];
-    char timestamp[30];
-    char method[10];
-    char url[256];
-    char http_version[10];
-    int status;
-    long long bytes;
-    char user_agent[256];
-} LogEntry;
+/*
+ * Faz o parsing de uma linha no formato:
+ *
+ * 172.16.31.40 - - [15/Sep/2025:00:21:26 -0300-0300]
+ * "GET /js/app.js HTTP/1.1" 200 4184 "Mozilla/5.0 ..."
+ */
 
-int parse_log_line(const char* line, LogEntry* entry) {
-    // Inicializa
-    memset(entry, 0, sizeof(LogEntry));
-    
-    // Extrai IP (primeiro campo)
-    char ip[16];
-    if (sscanf(line, "%15s", ip) != 1) return 0;
-    strcpy(entry->ip, ip);
-    
-    // Pula os dois "-"
-    const char* ptr = strstr(line, "- -");
-    if (!ptr) return 0;
-    ptr += 3; // Pula "- - "
-    
-    // Extrai timestamp
-    char timestamp[30];
-    if (sscanf(ptr, "[%29[^]]]", timestamp) != 1) return 0;
-    strcpy(entry->timestamp, timestamp);
-    
-    // Pula o timestamp
-    ptr = strstr(ptr, "] ");
-    if (!ptr) return 0;
-    ptr += 2;
-    
-    // Extrai a requisição (MÉTODO URL VERSION)
-    char request[512];
-    if (sscanf(ptr, "\"%[^\"]\"", request) != 1) return 0;
-    ptr = strstr(ptr, "\"");
-    if (!ptr) return 0;
-    ptr = strstr(ptr + 1, "\"");
-    if (!ptr) return 0;
-    ptr += 2; // Pula a aspa
-    
-    // Extrai method, url, version da requisição
-    char method[10], url[256], version[20];
-    sscanf(request, "%s %s %s", method, url, version);
-    strcpy(entry->method, method);
-    strcpy(entry->url, url);
-    strcpy(entry->http_version, version);
-    
-    // Extrai status code
-    int status;
-    if (sscanf(ptr, "%d", &status) != 1) return 0;
-    entry->status = status;
-    
-    // Pula o status
-    ptr = strstr(ptr, " ");
-    if (!ptr) return 0;
-    ptr++;
-    
-    // Extrai bytes (pode ser "-")
-    long long bytes;
-    if (strncmp(ptr, "-", 1) == 0) {
-        bytes = 0;
-        ptr++;
-    } else {
-        if (sscanf(ptr, "%lld", &bytes) != 1) return 0;
-        ptr = strstr(ptr, " ");
-        if (ptr) ptr++;
+ParsedLogEntry parse_log_line(char *line) {
+    ParsedLogEntry entry;
+
+    memset(&entry, 0, sizeof(ParsedLogEntry));
+
+    entry.valid = false;
+    entry.method = METHOD_OUTROS;
+    entry.user_agent = UA_OUTROS;
+
+    /* -------------------------------------------------
+       1. IP
+       ------------------------------------------------- */
+    char ip[MAX_IP_LEN];
+
+    if (sscanf(line, "%45s", ip) != 1) {
+        return entry;
     }
-    entry->bytes = bytes;
-    
-    // Extrai User-Agent (se existir)
-    if (ptr && *ptr == '\"') {
-        if (sscanf(ptr, "\"%[^\"]\"", entry->user_agent) == 1) {
-            // Extrai o navegador principal
-            char* chrome = strstr(entry->user_agent, "Chrome");
-            char* firefox = strstr(entry->user_agent, "Firefox");
-            char* safari = strstr(entry->user_agent, "Safari");
-            char* edge = strstr(entry->user_agent, "Edge");
-            
-            // Classifica o navegador
-            if (chrome) strcpy(entry->user_agent, "Chrome");
-            else if (firefox) strcpy(entry->user_agent, "Firefox");
-            else if (safari) strcpy(entry->user_agent, "Safari");
-            else if (edge) strcpy(entry->user_agent, "Edge");
-            else strcpy(entry->user_agent, "Other");
+
+    snprintf(entry.ip, MAX_IP_LEN, "%s", ip);
+
+    /* -------------------------------------------------
+       2. Timestamp
+       ------------------------------------------------- */
+    char timestamp[64];
+
+    const char *start_time = strchr(line, '[');
+
+    if (!start_time) {
+        return entry;
+    }
+
+    start_time++;
+
+    const char *end_time = strchr(start_time, ']');
+
+    if (!end_time) {
+        return entry;
+    }
+
+    size_t timestamp_len = (size_t)(end_time - start_time);
+
+    if (timestamp_len >= sizeof(timestamp)) {
+        return entry;
+    }
+
+    memcpy(timestamp, start_time, timestamp_len);
+    timestamp[timestamp_len] = '\0';
+
+    /* Extrai a hora.
+       Exemplo:
+       15/Sep/2025:00:21:26 -0300-0300
+                       ^^
+                       hora
+    */
+    int hour;
+
+    if (sscanf(timestamp, "%*[^:]:%d:", &hour) != 1) {
+        return entry;
+    }
+
+    if (hour < 0 || hour > 23) {
+        return entry;
+    }
+
+    entry.hour = hour;
+
+    /* -------------------------------------------------
+       3. Requisição HTTP
+       ------------------------------------------------- */
+    const char *request_start = strchr(end_time, '"');
+
+    if (!request_start) {
+        return entry;
+    }
+
+    request_start++;
+
+    const char *request_end = strchr(request_start, '"');
+
+    if (!request_end) {
+        return entry;
+    }
+
+    char request[512];
+
+    size_t request_len = (size_t)(request_end - request_start);
+
+    if (request_len >= sizeof(request)) {
+        return entry;
+    }
+
+    memcpy(request, request_start, request_len);
+    request[request_len] = '\0';
+
+    /* Método, URL e versão HTTP */
+    char method[32];
+    char url[MAX_URL_LEN];
+    char version[32];
+
+    if (sscanf(
+            request,
+            "%31s %255s %31s",
+            method,
+            url,
+            version
+        ) != 3) {
+        return entry;
+    }
+
+    snprintf(entry.url, MAX_URL_LEN, "%s", url);
+
+    /* Classificação do método */
+    if (strcmp(method, "GET") == 0) {
+        entry.method = METHOD_GET;
+    }
+    else if (strcmp(method, "POST") == 0) {
+        entry.method = METHOD_POST;
+    }
+    else if (strcmp(method, "PUT") == 0) {
+        entry.method = METHOD_PUT;
+    }
+    else if (strcmp(method, "DELETE") == 0) {
+        entry.method = METHOD_DELETE;
+    }
+    else {
+        entry.method = METHOD_OUTROS;
+    }
+
+    /* -------------------------------------------------
+       4. Código HTTP
+       ------------------------------------------------- */
+    const char *after_request = request_end + 1;
+
+    int status;
+
+    if (sscanf(after_request, "%d", &status) != 1) {
+        return entry;
+    }
+
+    entry.status_code = status;
+
+    /* -------------------------------------------------
+       5. Bytes
+       ------------------------------------------------- */
+    const char *status_end = strchr(after_request, ' ');
+
+    if (!status_end) {
+        return entry;
+    }
+
+    status_end++;
+
+    long long bytes;
+
+    if (*status_end == '-') {
+        bytes = 0;
+    }
+    else if (sscanf(status_end, "%lld", &bytes) == 1) {
+        /* valor lido normalmente */
+    }
+    else {
+        return entry;
+    }
+
+    entry.bytes = bytes;
+
+    /* -------------------------------------------------
+       6. User-Agent
+       ------------------------------------------------- */
+    const char *user_agent_start = strchr(status_end, '"');
+
+    if (user_agent_start) {
+
+        user_agent_start++;
+
+        const char *user_agent_end = strchr(
+            user_agent_start,
+            '"'
+        );
+
+        if (user_agent_end) {
+
+            char user_agent[512];
+
+            size_t ua_len =
+                (size_t)(user_agent_end - user_agent_start);
+
+            if (ua_len >= sizeof(user_agent)) {
+                ua_len = sizeof(user_agent) - 1;
+            }
+
+            memcpy(
+                user_agent,
+                user_agent_start,
+                ua_len
+            );
+
+            user_agent[ua_len] = '\0';
+
+            /*
+             * Edge deve ser testado antes de Chrome/Safari,
+             * porque User-Agents do Edge normalmente possuem
+             * "Chrome" e "Safari" também.
+             *
+             * Exemplo:
+             * Chrome/... Safari/... Edg/...
+             */
+            if (strstr(user_agent, "Edg") ||
+                strstr(user_agent, "Edge")) {
+
+                entry.user_agent = UA_EDGE;
+            }
+            else if (strstr(user_agent, "Chrome")) {
+
+                entry.user_agent = UA_CHROME;
+            }
+            else if (strstr(user_agent, "Firefox")) {
+
+                entry.user_agent = UA_FIREFOX;
+            }
+            else if (strstr(user_agent, "Safari")) {
+
+                entry.user_agent = UA_SAFARI;
+            }
+            else {
+
+                entry.user_agent = UA_OUTROS;
+            }
         }
     }
-    
-    return 1; // Sucesso
-}
 
-// Função para extrair hora do timestamp
-int extract_hour(const char* timestamp) {
-    int hour;
-    sscanf(timestamp, "%*[^:]:%d:", &hour);
-    return hour;
-}
+    /* Linha processada com sucesso */
+    entry.valid = true;
 
-// Função para classificar o código de status
-int status_category(int status) {
-    if (status >= 200 && status < 300) return 0; // 2xx
-    if (status >= 300 && status < 400) return 1; // 3xx
-    if (status >= 400 && status < 500) return 2; // 4xx
-    if (status >= 500 && status < 600) return 3; // 5xx
-    return 4; // Outros
-}
-
-// Função para classificar o método HTTP
-int method_category(const char* method) {
-    if (strcmp(method, "GET") == 0) return 0;
-    if (strcmp(method, "POST") == 0) return 1;
-    if (strcmp(method, "PUT") == 0) return 2;
-    if (strcmp(method, "DELETE") == 0) return 3;
-    return 4; // Outros
+    return entry;
 }
