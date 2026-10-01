@@ -83,8 +83,6 @@ int parse_log_line(const char* line, LogEntry* entry) {
             char* firefox = strstr(entry->user_agent, "Firefox");
             char* safari = strstr(entry->user_agent, "Safari");
             char* edge = strstr(entry->user_agent, "Edge");
-            char* bot = strstr(entry->user_agent, "Googlebot") || 
-                        strstr(entry->user_agent, "Bingbot");
             
             // Classifica o navegador
             if (chrome) strcpy(entry->user_agent, "Chrome");
