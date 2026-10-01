@@ -92,4 +92,13 @@ typedef struct {
     bool valid;
 } ParsedLogEntry;
 
+ParsedLogEntry parse_log_line(char *line);
+
+void print_report(
+    const char *filename,
+    int threads,
+    double elapsed,
+    LogStats *stats
+);
+
 #endif // LOG_COMMON_H
