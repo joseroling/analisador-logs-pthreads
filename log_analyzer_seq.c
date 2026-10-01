@@ -173,7 +173,7 @@ void extract_top_10(HashTable *ht, SortItem *out_top) {
 // -------------------------------------------------------------
 // FORMATAÇÃO DO RELATÓRIO CONFORME APÊNDICE 11
 // -------------------------------------------------------------
-void print_report(const char *filename, int threads, double elapsed, LogStats *stats) {
+void print_report(const char *filename, int threads, double elapsed, const LogStats *stats) {
     printf("============================================================\n");
     printf("ANALISADOR DE LOGS - RELATÓRIO COMPLETO\n");
     printf("============================================================\n");
