@@ -256,15 +256,12 @@ void generate_top_10(void) {
 
         if (i < (int)url_count) {
 
-            strncpy(
+            snprintf(
                 global_stats.top_urls[i].url,
-                url_items[i].key,
-                MAX_URL_LEN - 1
+                MAX_URL_LEN,
+                "%s",
+                url_items[i].key
             );
-
-            global_stats.top_urls[i]
-                .url[MAX_URL_LEN - 1] = '\0';
-
 
             global_stats.top_urls[i].count =
                 url_items[i].count;
@@ -285,15 +282,12 @@ void generate_top_10(void) {
 
         if (i < (int)ip_count) {
 
-            strncpy(
+            snprintf(
                 global_stats.top_ips[i].ip,
-                ip_items[i].key,
-                MAX_IP_LEN - 1
+                MAX_IP_LEN,
+                "%s",
+                ip_items[i].key
             );
-
-            global_stats.top_ips[i]
-                .ip[MAX_IP_LEN - 1] = '\0';
-
 
             global_stats.top_ips[i].count =
                 ip_items[i].count;
