@@ -1,0 +1,14 @@
+#define _POSIX_C_SOURCE 200809L
+#define _FILE_OFFSET_BITS 64
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
+#include <time.h>
+#include <sys/types.h>
+#include "log_parser.h"
+#include "parallel_util.h"
+typedef struct{const char*file;off_t start,end;LogStats s;HashTable u,i;}Arg;static pthread_mutex_t m=PTHREAD_MUTEX_INITIALIZER,scheduler=PTHREAD_MUTEX_INITIALIZER;static LogStats gs;static HashTable gu,gi;static off_t next_block=0,file_size=0,block_size=0;
+static void merge(Arg*a){pthread_mutex_lock(&m);gs.total_requests+=a->s.total_requests;gs.total_404+=a->s.total_404;gs.total_200+=a->s.total_200;gs.total_bytes+=a->s.total_bytes;for(int i=0;i<24;i++)gs.requests_per_hour[i]+=a->s.requests_per_hour[i];for(int i=0;i<NUM_STATUS_CODES;i++)gs.status_dist[i]+=a->s.status_dist[i];for(int i=0;i<NUM_METHODS;i++)gs.method_dist[i]+=a->s.method_dist[i];for(int i=0;i<NUM_UA;i++)gs.ua_dist[i]+=a->s.ua_dist[i];hash_merge(&gu,&a->u);hash_merge(&gi,&a->i);pthread_mutex_unlock(&m);}
+static void*run(void*p){Arg*a=p;FILE*f=fopen(a->file,"r");if(!f)return NULL;stats_init(&a->s);hash_init(&a->u);hash_init(&a->i);char line[MAX_LINE_LEN];for(;;){off_t start,end;if(block_size>0){pthread_mutex_lock(&scheduler);if(next_block>=file_size){pthread_mutex_unlock(&scheduler);break;}start=next_block;end=start+block_size;if(end>file_size)end=file_size;next_block=end;pthread_mutex_unlock(&scheduler);}else{start=a->start;end=a->end;if(start<0)break;a->start=-1;}if(fseeko(f,start,SEEK_SET)!=0)break;if(start>0){if(!fgets(line,sizeof(line),f))break;}off_t pos=ftello(f);while(pos<end&&fgets(line,sizeof(line),f)){ParsedLogEntry e=parse_log_line(line);if(e.valid){stats_add_entry(&a->s,&e);hash_insert(&a->u,e.url);hash_insert(&a->i,e.ip);}pos=ftello(f);if(pos<0)break;}}fclose(f);merge(a);return NULL;}
+static double tm(struct timespec*a,struct timespec*b){return(b->tv_sec-a->tv_sec)+(b->tv_nsec-a->tv_nsec)/1e9;}
+int main(int ac,char**av){if(ac<3){fprintf(stderr,"Uso: %s <log> <threads>\n",av[0]);return 1;}int n=atoi(av[2]);if(n<1||n>256)return 1;if(ac>4)block_size=(off_t)atoll(av[4]);FILE*f=fopen(av[1],"rb");if(!f){perror(av[1]);return 1;}fseeko(f,0,SEEK_END);off_t size=ftello(f);fclose(f);file_size=size;pthread_t*th=calloc(n,sizeof(*th));Arg*a=calloc(n,sizeof(*a));if(!th||!a)return 1;stats_init(&gs);hash_init(&gu);hash_init(&gi);next_block=0;struct timespec s,e;clock_gettime(CLOCK_MONOTONIC,&s);for(int i=0;i<n;i++){a[i]=(Arg){.file=av[1],.start=size*i/n,.end=size*(i+1)/n};if(pthread_create(&th[i],NULL,run,&a[i]))return 1;}for(int i=0;i<n;i++)pthread_join(th[i],NULL);clock_gettime(CLOCK_MONOTONIC,&e);top_from_hash(&gu,gs.top_urls);ip_top_from_hash(&gi,gs.top_ips);stats_finalize(&gs);print_report(av[1],n,tm(&s,&e),&gs);for(int i=0;i<n;i++){hash_free(&a[i].u);hash_free(&a[i].i);}hash_free(&gu);hash_free(&gi);free(th);free(a);return 0;}
