@@ -98,7 +98,7 @@ void print_report(
     const char *filename,
     int threads,
     double elapsed,
-    LogStats *stats
+    const LogStats *stats
 );
 
 #endif // LOG_COMMON_H
