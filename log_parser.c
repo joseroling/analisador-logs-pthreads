@@ -89,7 +89,6 @@ int parse_log_line(const char* line, LogEntry* entry) {
             else if (firefox) strcpy(entry->user_agent, "Firefox");
             else if (safari) strcpy(entry->user_agent, "Safari");
             else if (edge) strcpy(entry->user_agent, "Edge");
-            else if (bot) strcpy(entry->user_agent, "Bot");
             else strcpy(entry->user_agent, "Other");
         }
     }
