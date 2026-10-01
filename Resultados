@@ -1,0 +1,1066 @@
+gui035@DESKTOP-6M64OA7:/mnt/c/Users/PICHAU/Downloads/analisador-logs-pthreads-main/analisador-logs-pthreads-main$ python3 generate_log_advanced.py
+
+🔓 Usando semente aleatória: 3592732831
+📊 Gerando 1,000,000 linhas de log...
+📁 Arquivo: access_log_large.txt
+⏳ Processando...
+Progresso: 100%
+
+============================================================
+✅ RELATÓRIO DE GERAÇÃO
+============================================================
+📄 Arquivo gerado: access_log_large.txt
+📊 Total de linhas: 899,179
+⏱️  Tempo de geração: 13.39 segundos
+📈 Taxa de erro: 14.58%
+
+📊 Distribuição de Status Codes:
+  200:  698,296 (77.66%) ██████████████████████████████████████
+  201:   17,528 ( 1.95%)
+  204:    8,608 ( 0.96%)
+  301:   26,144 ( 2.91%) █
+  302:   13,149 ( 1.46%)
+  304:    4,310 ( 0.48%)
+  400:   17,450 ( 1.94%)
+  401:    8,898 ( 0.99%)
+  403:   13,154 ( 1.46%)
+  404:   61,168 ( 6.80%) ███
+  405:    4,353 ( 0.48%)
+  500:   13,028 ( 1.45%)
+  502:    4,379 ( 0.49%)
+  503:    4,367 ( 0.49%)
+  504:    4,347 ( 0.48%)
+
+📊 Distribuição de Métodos:
+  DELETE:   18,035 ( 2.01%)
+  GET:  737,686 (82.04%)
+  HEAD:    9,292 ( 1.03%)
+  POST:  107,357 (11.94%)
+  PUT:   26,809 ( 2.98%)
+
+📊 Top 5 User-Agents:
+  Mozilla/5.0 (Windows NT 10.0; Win64; x64:  380,029 (42.26%)
+  Mozilla/5.0 (Macintosh; Intel Mac OS X 1:  148,369 (16.50%)
+  Mozilla/5.0 (Windows NT 10.0; Win64; x64:   93,197 (10.36%)
+  Mozilla/5.0 (Linux; Android 14; SM-G998B:   55,428 ( 6.16%)
+  Mozilla/5.0 (iPhone; CPU iPhone OS 17_1 :   55,282 ( 6.15%)
+
+📊 Distribuição por Hora (Top 5):
+  06:00:   42,000 ( 4.67%)
+  07:00:   42,000 ( 4.67%)
+  08:00:   42,000 ( 4.67%)
+  09:00:   42,000 ( 4.67%)
+  10:00:   42,000 ( 4.67%)
+============================================================
+
+🎯 Script concluído com sucesso!
+gui035@DESKTOP-6M64OA7:/mnt/c/Users/PICHAU/Downloads/analisador-logs-pthreads-main/analisador-logs-pthreads-main$ ./log_analyzer_par access_log_large.txt 2
+============================================================
+ANALISADOR DE LOGS - RELATÓRIO COMPLETO
+============================================================
+ARQUIVO: access_log_large.txt
+THREADS: 2
+TEMPO DE EXECUÇÃO: 2.318882 segundos
+------------------------------------------------------------
+ESTATÍSTICAS BÁSICAS
+------------------------------------------------------------
+Total de Requisições: 899179
+Requisições 200 (OK): 698296 (77.66%)
+Requisições 404 (Not Found): 61168 (6.80%)
+Total de Bytes: 139659200
+Média de Bytes/Req: 155 bytes
+Taxa de Erro Geral: 14.58%
+------------------------------------------------------------
+DISTRIBUIÇÃO POR HORA (0-23h)
+------------------------------------------------------------
+00h: 25220
+01h: 25169
+02h: 25109
+03h: 25091
+04h: 25205
+05h: 25385
+06h: 42000
+07h: 42000
+08h: 42000
+09h: 42000
+10h: 42000
+11h: 42000
+12h: 42000
+13h: 42000
+14h: 42000
+15h: 42000
+16h: 41000
+17h: 41000
+18h: 41000
+19h: 41000
+20h: 41000
+21h: 41000
+22h: 41000
+23h: 41000
+------------------------------------------------------------
+TOP 10 URLs MAIS ACESSADAS
+------------------------------------------------------------
+ 1. /index.html                    134490 acessos
+ 2. /products.html                 50195 acessos
+ 3. /api/health                    50059 acessos
+ 4. /css/style.css                 44789 acessos
+ 5. /js/app.js                     37771 acessos
+ 6. /about.html                    37103 acessos
+ 7. /api/users                     35336 acessos
+ 8. /images/logo.png               33988 acessos
+ 9. /api/data                      31447 acessos
+10. /services.html                 30034 acessos
+------------------------------------------------------------
+TOP 10 IPS MAIS ATIVOS
+------------------------------------------------------------
+ 1. 192.168.1.10         179348 requisições
+ 2. 10.0.0.5             156217 requisições
+ 3. 172.16.31.40         141429 requisições
+ 4. 192.168.1.100        126198 requisições
+ 5. 10.0.0.15            52174 requisições
+ 6. 203.0.113.78         36988 requisições
+ 7. 198.51.100.22        36985 requisições
+ 8. 8.8.8.8              29687 requisições
+ 9. 1.1.1.1              29411 requisições
+10. 54.12.34.56          22156 requisições
+------------------------------------------------------------
+DISTRIBUIÇÃO DE CÓDIGOS DE STATUS
+------------------------------------------------------------
+200 OK           698296
+301 Moved        26144
+302 Found        13149
+400 Bad Req      17450
+403 Forbidden    13154
+404 Not Found    61168
+500 Internal     13028
+502 Bad Gateway  4379
+503 Unavail      4367
+Outros           48044
+------------------------------------------------------------
+ANÁLISE DE MÉTODOS HTTP
+------------------------------------------------------------
+GET        737686
+POST       107357
+PUT        26809
+DELETE     18035
+OUTROS     9292
+------------------------------------------------------------
+ANÁLISE DE USER-AGENT (Top 5)
+------------------------------------------------------------
+Chrome       491186
+Firefox      167222
+Safari       129608
+Edge         55444
+Outros       55719
+============================================================
+FIM DO RELATÓRIO
+============================================================
+gui035@DESKTOP-6M64OA7:/mnt/c/Users/PICHAU/Downloads/analisador-logs-pthreads-main/analisador-logs-pthreads-main$ ./log_analyzer_par access_log_large.txt 1
+============================================================
+ANALISADOR DE LOGS - RELATÓRIO COMPLETO
+============================================================
+ARQUIVO: access_log_large.txt
+THREADS: 1
+TEMPO DE EXECUÇÃO: 3.908033 segundos
+------------------------------------------------------------
+ESTATÍSTICAS BÁSICAS
+------------------------------------------------------------
+Total de Requisições: 899179
+Requisições 200 (OK): 698296 (77.66%)
+Requisições 404 (Not Found): 61168 (6.80%)
+Total de Bytes: 139659200
+Média de Bytes/Req: 155 bytes
+Taxa de Erro Geral: 14.58%
+------------------------------------------------------------
+DISTRIBUIÇÃO POR HORA (0-23h)
+------------------------------------------------------------
+00h: 25220
+01h: 25169
+02h: 25109
+03h: 25091
+04h: 25205
+05h: 25385
+06h: 42000
+07h: 42000
+08h: 42000
+09h: 42000
+10h: 42000
+11h: 42000
+12h: 42000
+13h: 42000
+14h: 42000
+15h: 42000
+16h: 41000
+17h: 41000
+18h: 41000
+19h: 41000
+20h: 41000
+21h: 41000
+22h: 41000
+23h: 41000
+------------------------------------------------------------
+TOP 10 URLs MAIS ACESSADAS
+------------------------------------------------------------
+ 1. /index.html                    134490 acessos
+ 2. /products.html                 50195 acessos
+ 3. /api/health                    50059 acessos
+ 4. /css/style.css                 44789 acessos
+ 5. /js/app.js                     37771 acessos
+ 6. /about.html                    37103 acessos
+ 7. /api/users                     35336 acessos
+ 8. /images/logo.png               33988 acessos
+ 9. /api/data                      31447 acessos
+10. /services.html                 30034 acessos
+------------------------------------------------------------
+TOP 10 IPS MAIS ATIVOS
+------------------------------------------------------------
+ 1. 192.168.1.10         179348 requisições
+ 2. 10.0.0.5             156217 requisições
+ 3. 172.16.31.40         141429 requisições
+ 4. 192.168.1.100        126198 requisições
+ 5. 10.0.0.15            52174 requisições
+ 6. 203.0.113.78         36988 requisições
+ 7. 198.51.100.22        36985 requisições
+ 8. 8.8.8.8              29687 requisições
+ 9. 1.1.1.1              29411 requisições
+10. 54.12.34.56          22156 requisições
+------------------------------------------------------------
+DISTRIBUIÇÃO DE CÓDIGOS DE STATUS
+------------------------------------------------------------
+200 OK           698296
+301 Moved        26144
+302 Found        13149
+400 Bad Req      17450
+403 Forbidden    13154
+404 Not Found    61168
+500 Internal     13028
+502 Bad Gateway  4379
+503 Unavail      4367
+Outros           48044
+------------------------------------------------------------
+ANÁLISE DE MÉTODOS HTTP
+------------------------------------------------------------
+GET        737686
+POST       107357
+PUT        26809
+DELETE     18035
+OUTROS     9292
+------------------------------------------------------------
+ANÁLISE DE USER-AGENT (Top 5)
+------------------------------------------------------------
+Chrome       491186
+Firefox      167222
+Safari       129608
+Edge         55444
+Outros       55719
+============================================================
+FIM DO RELATÓRIO
+============================================================
+gui035@DESKTOP-6M64OA7:/mnt/c/Users/PICHAU/Downloads/analisador-logs-pthreads-main/analisador-logs-pthreads-main$ ./log_analyzer_par access_log_large.txt 4
+============================================================
+ANALISADOR DE LOGS - RELATÓRIO COMPLETO
+============================================================
+ARQUIVO: access_log_large.txt
+THREADS: 4
+TEMPO DE EXECUÇÃO: 1.501603 segundos
+------------------------------------------------------------
+ESTATÍSTICAS BÁSICAS
+------------------------------------------------------------
+Total de Requisições: 899179
+Requisições 200 (OK): 698296 (77.66%)
+Requisições 404 (Not Found): 61168 (6.80%)
+Total de Bytes: 139659200
+Média de Bytes/Req: 155 bytes
+Taxa de Erro Geral: 14.58%
+------------------------------------------------------------
+DISTRIBUIÇÃO POR HORA (0-23h)
+------------------------------------------------------------
+00h: 25220
+01h: 25169
+02h: 25109
+03h: 25091
+04h: 25205
+05h: 25385
+06h: 42000
+07h: 42000
+08h: 42000
+09h: 42000
+10h: 42000
+11h: 42000
+12h: 42000
+13h: 42000
+14h: 42000
+15h: 42000
+16h: 41000
+17h: 41000
+18h: 41000
+19h: 41000
+20h: 41000
+21h: 41000
+22h: 41000
+23h: 41000
+------------------------------------------------------------
+TOP 10 URLs MAIS ACESSADAS
+------------------------------------------------------------
+ 1. /index.html                    134490 acessos
+ 2. /products.html                 50195 acessos
+ 3. /api/health                    50059 acessos
+ 4. /css/style.css                 44789 acessos
+ 5. /js/app.js                     37771 acessos
+ 6. /about.html                    37103 acessos
+ 7. /api/users                     35336 acessos
+ 8. /images/logo.png               33988 acessos
+ 9. /api/data                      31447 acessos
+10. /services.html                 30034 acessos
+------------------------------------------------------------
+TOP 10 IPS MAIS ATIVOS
+------------------------------------------------------------
+ 1. 192.168.1.10         179348 requisições
+ 2. 10.0.0.5             156217 requisições
+ 3. 172.16.31.40         141429 requisições
+ 4. 192.168.1.100        126198 requisições
+ 5. 10.0.0.15            52174 requisições
+ 6. 203.0.113.78         36988 requisições
+ 7. 198.51.100.22        36985 requisições
+ 8. 8.8.8.8              29687 requisições
+ 9. 1.1.1.1              29411 requisições
+10. 54.12.34.56          22156 requisições
+------------------------------------------------------------
+DISTRIBUIÇÃO DE CÓDIGOS DE STATUS
+------------------------------------------------------------
+200 OK           698296
+301 Moved        26144
+302 Found        13149
+400 Bad Req      17450
+403 Forbidden    13154
+404 Not Found    61168
+500 Internal     13028
+502 Bad Gateway  4379
+503 Unavail      4367
+Outros           48044
+------------------------------------------------------------
+ANÁLISE DE MÉTODOS HTTP
+------------------------------------------------------------
+GET        737686
+POST       107357
+PUT        26809
+DELETE     18035
+OUTROS     9292
+------------------------------------------------------------
+ANÁLISE DE USER-AGENT (Top 5)
+------------------------------------------------------------
+Chrome       491186
+Firefox      167222
+Safari       129608
+Edge         55444
+Outros       55719
+============================================================
+FIM DO RELATÓRIO
+============================================================
+gui035@DESKTOP-6M64OA7:/mnt/c/Users/PICHAU/Downloads/analisador-logs-pthreads-main/analisador-logs-pthreads-main$ ./log_analyzer_par access_log_large.txt 8
+============================================================
+ANALISADOR DE LOGS - RELATÓRIO COMPLETO
+============================================================
+ARQUIVO: access_log_large.txt
+THREADS: 8
+TEMPO DE EXECUÇÃO: 1.228056 segundos
+------------------------------------------------------------
+ESTATÍSTICAS BÁSICAS
+------------------------------------------------------------
+Total de Requisições: 899179
+Requisições 200 (OK): 698296 (77.66%)
+Requisições 404 (Not Found): 61168 (6.80%)
+Total de Bytes: 139659200
+Média de Bytes/Req: 155 bytes
+Taxa de Erro Geral: 14.58%
+------------------------------------------------------------
+DISTRIBUIÇÃO POR HORA (0-23h)
+------------------------------------------------------------
+00h: 25220
+01h: 25169
+02h: 25109
+03h: 25091
+04h: 25205
+05h: 25385
+06h: 42000
+07h: 42000
+08h: 42000
+09h: 42000
+10h: 42000
+11h: 42000
+12h: 42000
+13h: 42000
+14h: 42000
+15h: 42000
+16h: 41000
+17h: 41000
+18h: 41000
+19h: 41000
+20h: 41000
+21h: 41000
+22h: 41000
+23h: 41000
+------------------------------------------------------------
+TOP 10 URLs MAIS ACESSADAS
+------------------------------------------------------------
+ 1. /index.html                    134490 acessos
+ 2. /products.html                 50195 acessos
+ 3. /api/health                    50059 acessos
+ 4. /css/style.css                 44789 acessos
+ 5. /js/app.js                     37771 acessos
+ 6. /about.html                    37103 acessos
+ 7. /api/users                     35336 acessos
+ 8. /images/logo.png               33988 acessos
+ 9. /api/data                      31447 acessos
+10. /services.html                 30034 acessos
+------------------------------------------------------------
+TOP 10 IPS MAIS ATIVOS
+------------------------------------------------------------
+ 1. 192.168.1.10         179348 requisições
+ 2. 10.0.0.5             156217 requisições
+ 3. 172.16.31.40         141429 requisições
+ 4. 192.168.1.100        126198 requisições
+ 5. 10.0.0.15            52174 requisições
+ 6. 203.0.113.78         36988 requisições
+ 7. 198.51.100.22        36985 requisições
+ 8. 8.8.8.8              29687 requisições
+ 9. 1.1.1.1              29411 requisições
+10. 54.12.34.56          22156 requisições
+------------------------------------------------------------
+DISTRIBUIÇÃO DE CÓDIGOS DE STATUS
+------------------------------------------------------------
+200 OK           698296
+301 Moved        26144
+302 Found        13149
+400 Bad Req      17450
+403 Forbidden    13154
+404 Not Found    61168
+500 Internal     13028
+502 Bad Gateway  4379
+503 Unavail      4367
+Outros           48044
+------------------------------------------------------------
+ANÁLISE DE MÉTODOS HTTP
+------------------------------------------------------------
+GET        737686
+POST       107357
+PUT        26809
+DELETE     18035
+OUTROS     9292
+------------------------------------------------------------
+ANÁLISE DE USER-AGENT (Top 5)
+------------------------------------------------------------
+Chrome       491186
+Firefox      167222
+Safari       129608
+Edge         55444
+Outros       55719
+============================================================
+FIM DO RELATÓRIO
+============================================================
+gui035@DESKTOP-6M64OA7:/mnt/c/Users/PICHAU/Downloads/analisador-logs-pthreads-main/analisador-logs-pthreads-main$ ./log_analyzer_par access_log_large.txt 16
+============================================================
+ANALISADOR DE LOGS - RELATÓRIO COMPLETO
+============================================================
+ARQUIVO: access_log_large.txt
+THREADS: 16
+TEMPO DE EXECUÇÃO: 1.091900 segundos
+------------------------------------------------------------
+ESTATÍSTICAS BÁSICAS
+------------------------------------------------------------
+Total de Requisições: 899179
+Requisições 200 (OK): 698296 (77.66%)
+Requisições 404 (Not Found): 61168 (6.80%)
+Total de Bytes: 139659200
+Média de Bytes/Req: 155 bytes
+Taxa de Erro Geral: 14.58%
+------------------------------------------------------------
+DISTRIBUIÇÃO POR HORA (0-23h)
+------------------------------------------------------------
+00h: 25220
+01h: 25169
+02h: 25109
+03h: 25091
+04h: 25205
+05h: 25385
+06h: 42000
+07h: 42000
+08h: 42000
+09h: 42000
+10h: 42000
+11h: 42000
+12h: 42000
+13h: 42000
+14h: 42000
+15h: 42000
+16h: 41000
+17h: 41000
+18h: 41000
+19h: 41000
+20h: 41000
+21h: 41000
+22h: 41000
+23h: 41000
+------------------------------------------------------------
+TOP 10 URLs MAIS ACESSADAS
+------------------------------------------------------------
+ 1. /index.html                    134490 acessos
+ 2. /products.html                 50195 acessos
+ 3. /api/health                    50059 acessos
+ 4. /css/style.css                 44789 acessos
+ 5. /js/app.js                     37771 acessos
+ 6. /about.html                    37103 acessos
+ 7. /api/users                     35336 acessos
+ 8. /images/logo.png               33988 acessos
+ 9. /api/data                      31447 acessos
+10. /services.html                 30034 acessos
+------------------------------------------------------------
+TOP 10 IPS MAIS ATIVOS
+------------------------------------------------------------
+ 1. 192.168.1.10         179348 requisições
+ 2. 10.0.0.5             156217 requisições
+ 3. 172.16.31.40         141429 requisições
+ 4. 192.168.1.100        126198 requisições
+ 5. 10.0.0.15            52174 requisições
+ 6. 203.0.113.78         36988 requisições
+ 7. 198.51.100.22        36985 requisições
+ 8. 8.8.8.8              29687 requisições
+ 9. 1.1.1.1              29411 requisições
+10. 54.12.34.56          22156 requisições
+------------------------------------------------------------
+DISTRIBUIÇÃO DE CÓDIGOS DE STATUS
+------------------------------------------------------------
+200 OK           698296
+301 Moved        26144
+302 Found        13149
+400 Bad Req      17450
+403 Forbidden    13154
+404 Not Found    61168
+500 Internal     13028
+502 Bad Gateway  4379
+503 Unavail      4367
+Outros           48044
+------------------------------------------------------------
+ANÁLISE DE MÉTODOS HTTP
+------------------------------------------------------------
+GET        737686
+POST       107357
+PUT        26809
+DELETE     18035
+OUTROS     9292
+------------------------------------------------------------
+ANÁLISE DE USER-AGENT (Top 5)
+------------------------------------------------------------
+Chrome       491186
+Firefox      167222
+Safari       129608
+Edge         55444
+Outros       55719
+============================================================
+FIM DO RELATÓRIO
+============================================================
+gui035@DESKTOP-6M64OA7:/mnt/c/Users/PICHAU/Downloads/analisador-logs-pthreads-main/analisador-logs-pthreads-main$ ./log_analyzer_par_optimized access_log_large.txt 1
+============================================================
+ANALISADOR DE LOGS - RELATÓRIO COMPLETO
+============================================================
+ARQUIVO: access_log_large.txt
+THREADS: 1
+TEMPO DE EXECUÇÃO: 4.083427 segundos
+------------------------------------------------------------
+ESTATÍSTICAS BÁSICAS
+------------------------------------------------------------
+Total de Requisições: 899179
+Requisições 200 (OK): 698296 (77.66%)
+Requisições 404 (Not Found): 61168 (6.80%)
+Total de Bytes: 139659200
+Média de Bytes/Req: 155 bytes
+Taxa de Erro Geral: 17.97%
+------------------------------------------------------------
+DISTRIBUIÇÃO POR HORA (0-23h)
+------------------------------------------------------------
+00h: 25220
+01h: 25169
+02h: 25109
+03h: 25091
+04h: 25205
+05h: 25385
+06h: 42000
+07h: 42000
+08h: 42000
+09h: 42000
+10h: 42000
+11h: 42000
+12h: 42000
+13h: 42000
+14h: 42000
+15h: 42000
+16h: 41000
+17h: 41000
+18h: 41000
+19h: 41000
+20h: 41000
+21h: 41000
+22h: 41000
+23h: 41000
+------------------------------------------------------------
+TOP 10 URLs MAIS ACESSADAS
+------------------------------------------------------------
+ 1. /index.html                    134490 acessos
+ 2. /products.html                 50195 acessos
+ 3. /api/health                    50059 acessos
+ 4. /css/style.css                 44789 acessos
+ 5. /js/app.js                     37771 acessos
+ 6. /about.html                    37103 acessos
+ 7. /api/users                     35336 acessos
+ 8. /images/logo.png               33988 acessos
+ 9. /api/data                      31447 acessos
+10. /services.html                 30034 acessos
+------------------------------------------------------------
+TOP 10 IPS MAIS ATIVOS
+------------------------------------------------------------
+ 1. 192.168.1.10         179348 requisições
+ 2. 10.0.0.5             156217 requisições
+ 3. 172.16.31.40         141429 requisições
+ 4. 192.168.1.100        126198 requisições
+ 5. 10.0.0.15            52174 requisições
+ 6. 203.0.113.78         36988 requisições
+ 7. 198.51.100.22        36985 requisições
+ 8. 8.8.8.8              29687 requisições
+ 9. 1.1.1.1              29411 requisições
+10. 54.12.34.56          22156 requisições
+------------------------------------------------------------
+DISTRIBUIÇÃO DE CÓDIGOS DE STATUS
+------------------------------------------------------------
+200 OK           698296
+301 Moved        26144
+302 Found        13149
+400 Bad Req      17450
+403 Forbidden    13154
+404 Not Found    61168
+500 Internal     13028
+502 Bad Gateway  4379
+503 Unavail      4367
+Outros           48044
+------------------------------------------------------------
+ANÁLISE DE MÉTODOS HTTP
+------------------------------------------------------------
+GET        737686
+POST       107357
+PUT        26809
+DELETE     18035
+OUTROS     9292
+------------------------------------------------------------
+ANÁLISE DE USER-AGENT (Top 5)
+------------------------------------------------------------
+Chrome       491186
+Firefox      167222
+Safari       129608
+Edge         55444
+Outros       55719
+============================================================
+FIM DO RELATÓRIO
+============================================================
+gui035@DESKTOP-6M64OA7:/mnt/c/Users/PICHAU/Downloads/analisador-logs-pthreads-main/analisador-logs-pthreads-main$ ./log_analyzer_par_optimized access_log_large.txt 2
+============================================================
+ANALISADOR DE LOGS - RELATÓRIO COMPLETO
+============================================================
+ARQUIVO: access_log_large.txt
+THREADS: 2
+TEMPO DE EXECUÇÃO: 2.131549 segundos
+------------------------------------------------------------
+ESTATÍSTICAS BÁSICAS
+------------------------------------------------------------
+Total de Requisições: 899179
+Requisições 200 (OK): 698296 (77.66%)
+Requisições 404 (Not Found): 61168 (6.80%)
+Total de Bytes: 139659200
+Média de Bytes/Req: 155 bytes
+Taxa de Erro Geral: 17.97%
+------------------------------------------------------------
+DISTRIBUIÇÃO POR HORA (0-23h)
+------------------------------------------------------------
+00h: 25220
+01h: 25169
+02h: 25109
+03h: 25091
+04h: 25205
+05h: 25385
+06h: 42000
+07h: 42000
+08h: 42000
+09h: 42000
+10h: 42000
+11h: 42000
+12h: 42000
+13h: 42000
+14h: 42000
+15h: 42000
+16h: 41000
+17h: 41000
+18h: 41000
+19h: 41000
+20h: 41000
+21h: 41000
+22h: 41000
+23h: 41000
+------------------------------------------------------------
+TOP 10 URLs MAIS ACESSADAS
+------------------------------------------------------------
+ 1. /index.html                    134490 acessos
+ 2. /products.html                 50195 acessos
+ 3. /api/health                    50059 acessos
+ 4. /css/style.css                 44789 acessos
+ 5. /js/app.js                     37771 acessos
+ 6. /about.html                    37103 acessos
+ 7. /api/users                     35336 acessos
+ 8. /images/logo.png               33988 acessos
+ 9. /api/data                      31447 acessos
+10. /services.html                 30034 acessos
+------------------------------------------------------------
+TOP 10 IPS MAIS ATIVOS
+------------------------------------------------------------
+ 1. 192.168.1.10         179348 requisições
+ 2. 10.0.0.5             156217 requisições
+ 3. 172.16.31.40         141429 requisições
+ 4. 192.168.1.100        126198 requisições
+ 5. 10.0.0.15            52174 requisições
+ 6. 203.0.113.78         36988 requisições
+ 7. 198.51.100.22        36985 requisições
+ 8. 8.8.8.8              29687 requisições
+ 9. 1.1.1.1              29411 requisições
+10. 54.12.34.56          22156 requisições
+------------------------------------------------------------
+DISTRIBUIÇÃO DE CÓDIGOS DE STATUS
+------------------------------------------------------------
+200 OK           698296
+301 Moved        26144
+302 Found        13149
+400 Bad Req      17450
+403 Forbidden    13154
+404 Not Found    61168
+500 Internal     13028
+502 Bad Gateway  4379
+503 Unavail      4367
+Outros           48044
+------------------------------------------------------------
+ANÁLISE DE MÉTODOS HTTP
+------------------------------------------------------------
+GET        737686
+POST       107357
+PUT        26809
+DELETE     18035
+OUTROS     9292
+------------------------------------------------------------
+ANÁLISE DE USER-AGENT (Top 5)
+------------------------------------------------------------
+Chrome       491186
+Firefox      167222
+Safari       129608
+Edge         55444
+Outros       55719
+============================================================
+FIM DO RELATÓRIO
+============================================================
+gui035@DESKTOP-6M64OA7:/mnt/c/Users/PICHAU/Downloads/analisador-logs-pthreads-main/analisador-logs-pthreads-main$ ./log_analyzer_par_optimized access_log_large.txt 4
+============================================================
+ANALISADOR DE LOGS - RELATÓRIO COMPLETO
+============================================================
+ARQUIVO: access_log_large.txt
+THREADS: 4
+TEMPO DE EXECUÇÃO: 1.460926 segundos
+------------------------------------------------------------
+ESTATÍSTICAS BÁSICAS
+------------------------------------------------------------
+Total de Requisições: 899179
+Requisições 200 (OK): 698296 (77.66%)
+Requisições 404 (Not Found): 61168 (6.80%)
+Total de Bytes: 139659200
+Média de Bytes/Req: 155 bytes
+Taxa de Erro Geral: 17.97%
+------------------------------------------------------------
+DISTRIBUIÇÃO POR HORA (0-23h)
+------------------------------------------------------------
+00h: 25220
+01h: 25169
+02h: 25109
+03h: 25091
+04h: 25205
+05h: 25385
+06h: 42000
+07h: 42000
+08h: 42000
+09h: 42000
+10h: 42000
+11h: 42000
+12h: 42000
+13h: 42000
+14h: 42000
+15h: 42000
+16h: 41000
+17h: 41000
+18h: 41000
+19h: 41000
+20h: 41000
+21h: 41000
+22h: 41000
+23h: 41000
+------------------------------------------------------------
+TOP 10 URLs MAIS ACESSADAS
+------------------------------------------------------------
+ 1. /index.html                    134490 acessos
+ 2. /products.html                 50195 acessos
+ 3. /api/health                    50059 acessos
+ 4. /css/style.css                 44789 acessos
+ 5. /js/app.js                     37771 acessos
+ 6. /about.html                    37103 acessos
+ 7. /api/users                     35336 acessos
+ 8. /images/logo.png               33988 acessos
+ 9. /api/data                      31447 acessos
+10. /services.html                 30034 acessos
+------------------------------------------------------------
+TOP 10 IPS MAIS ATIVOS
+------------------------------------------------------------
+ 1. 192.168.1.10         179348 requisições
+ 2. 10.0.0.5             156217 requisições
+ 3. 172.16.31.40         141429 requisições
+ 4. 192.168.1.100        126198 requisições
+ 5. 10.0.0.15            52174 requisições
+ 6. 203.0.113.78         36988 requisições
+ 7. 198.51.100.22        36985 requisições
+ 8. 8.8.8.8              29687 requisições
+ 9. 1.1.1.1              29411 requisições
+10. 54.12.34.56          22156 requisições
+------------------------------------------------------------
+DISTRIBUIÇÃO DE CÓDIGOS DE STATUS
+------------------------------------------------------------
+200 OK           698296
+301 Moved        26144
+302 Found        13149
+400 Bad Req      17450
+403 Forbidden    13154
+404 Not Found    61168
+500 Internal     13028
+502 Bad Gateway  4379
+503 Unavail      4367
+Outros           48044
+------------------------------------------------------------
+ANÁLISE DE MÉTODOS HTTP
+------------------------------------------------------------
+GET        737686
+POST       107357
+PUT        26809
+DELETE     18035
+OUTROS     9292
+------------------------------------------------------------
+ANÁLISE DE USER-AGENT (Top 5)
+------------------------------------------------------------
+Chrome       491186
+Firefox      167222
+Safari       129608
+Edge         55444
+Outros       55719
+============================================================
+FIM DO RELATÓRIO
+============================================================
+gui035@DESKTOP-6M64OA7:/mnt/c/Users/PICHAU/Downloads/analisador-logs-pthreads-main/analisador-logs-pthreads-main$ ./log_analyzer_par_optimized access_log_large.txt 8
+============================================================
+ANALISADOR DE LOGS - RELATÓRIO COMPLETO
+============================================================
+ARQUIVO: access_log_large.txt
+THREADS: 8
+TEMPO DE EXECUÇÃO: 1.264157 segundos
+------------------------------------------------------------
+ESTATÍSTICAS BÁSICAS
+------------------------------------------------------------
+Total de Requisições: 899178
+Requisições 200 (OK): 698295 (77.66%)
+Requisições 404 (Not Found): 61168 (6.80%)
+Total de Bytes: 139659000
+Média de Bytes/Req: 155 bytes
+Taxa de Erro Geral: 17.97%
+------------------------------------------------------------
+DISTRIBUIÇÃO POR HORA (0-23h)
+------------------------------------------------------------
+00h: 25220
+01h: 25169
+02h: 25109
+03h: 25091
+04h: 25205
+05h: 25385
+06h: 42000
+07h: 42000
+08h: 42000
+09h: 42000
+10h: 42000
+11h: 42000
+12h: 42000
+13h: 42000
+14h: 42000
+15h: 41999
+16h: 41000
+17h: 41000
+18h: 41000
+19h: 41000
+20h: 41000
+21h: 41000
+22h: 41000
+23h: 41000
+------------------------------------------------------------
+TOP 10 URLs MAIS ACESSADAS
+------------------------------------------------------------
+ 1. /index.html                    134490 acessos
+ 2. /products.html                 50194 acessos
+ 3. /api/health                    50059 acessos
+ 4. /css/style.css                 44789 acessos
+ 5. /js/app.js                     37771 acessos
+ 6. /about.html                    37103 acessos
+ 7. /api/users                     35336 acessos
+ 8. /images/logo.png               33988 acessos
+ 9. /api/data                      31447 acessos
+10. /services.html                 30034 acessos
+------------------------------------------------------------
+TOP 10 IPS MAIS ATIVOS
+------------------------------------------------------------
+ 1. 192.168.1.10         179347 requisições
+ 2. 10.0.0.5             156217 requisições
+ 3. 172.16.31.40         141429 requisições
+ 4. 192.168.1.100        126198 requisições
+ 5. 10.0.0.15            52174 requisições
+ 6. 203.0.113.78         36988 requisições
+ 7. 198.51.100.22        36985 requisições
+ 8. 8.8.8.8              29687 requisições
+ 9. 1.1.1.1              29411 requisições
+10. 54.12.34.56          22156 requisições
+------------------------------------------------------------
+DISTRIBUIÇÃO DE CÓDIGOS DE STATUS
+------------------------------------------------------------
+200 OK           698295
+301 Moved        26144
+302 Found        13149
+400 Bad Req      17450
+403 Forbidden    13154
+404 Not Found    61168
+500 Internal     13028
+502 Bad Gateway  4379
+503 Unavail      4367
+Outros           48044
+------------------------------------------------------------
+ANÁLISE DE MÉTODOS HTTP
+------------------------------------------------------------
+GET        737685
+POST       107357
+PUT        26809
+DELETE     18035
+OUTROS     9292
+------------------------------------------------------------
+ANÁLISE DE USER-AGENT (Top 5)
+------------------------------------------------------------
+Chrome       491185
+Firefox      167222
+Safari       129608
+Edge         55444
+Outros       55719
+============================================================
+FIM DO RELATÓRIO
+============================================================
+gui035@DESKTOP-6M64OA7:/mnt/c/Users/PICHAU/Downloads/analisador-logs-pthreads-main/analisador-logs-pthreads-main$ ./log_analyzer_par_optimized access_log_large.txt 16
+============================================================
+ANALISADOR DE LOGS - RELATÓRIO COMPLETO
+============================================================
+ARQUIVO: access_log_large.txt
+THREADS: 16
+TEMPO DE EXECUÇÃO: 1.032230 segundos
+------------------------------------------------------------
+ESTATÍSTICAS BÁSICAS
+------------------------------------------------------------
+Total de Requisições: 899178
+Requisições 200 (OK): 698295 (77.66%)
+Requisições 404 (Not Found): 61168 (6.80%)
+Total de Bytes: 139659000
+Média de Bytes/Req: 155 bytes
+Taxa de Erro Geral: 17.97%
+------------------------------------------------------------
+DISTRIBUIÇÃO POR HORA (0-23h)
+------------------------------------------------------------
+00h: 25220
+01h: 25169
+02h: 25109
+03h: 25091
+04h: 25205
+05h: 25385
+06h: 42000
+07h: 42000
+08h: 42000
+09h: 42000
+10h: 42000
+11h: 42000
+12h: 42000
+13h: 42000
+14h: 42000
+15h: 41999
+16h: 41000
+17h: 41000
+18h: 41000
+19h: 41000
+20h: 41000
+21h: 41000
+22h: 41000
+23h: 41000
+------------------------------------------------------------
+TOP 10 URLs MAIS ACESSADAS
+------------------------------------------------------------
+ 1. /index.html                    134490 acessos
+ 2. /products.html                 50194 acessos
+ 3. /api/health                    50059 acessos
+ 4. /css/style.css                 44789 acessos
+ 5. /js/app.js                     37771 acessos
+ 6. /about.html                    37103 acessos
+ 7. /api/users                     35336 acessos
+ 8. /images/logo.png               33988 acessos
+ 9. /api/data                      31447 acessos
+10. /services.html                 30034 acessos
+------------------------------------------------------------
+TOP 10 IPS MAIS ATIVOS
+------------------------------------------------------------
+ 1. 192.168.1.10         179347 requisições
+ 2. 10.0.0.5             156217 requisições
+ 3. 172.16.31.40         141429 requisições
+ 4. 192.168.1.100        126198 requisições
+ 5. 10.0.0.15            52174 requisições
+ 6. 203.0.113.78         36988 requisições
+ 7. 198.51.100.22        36985 requisições
+ 8. 8.8.8.8              29687 requisições
+ 9. 1.1.1.1              29411 requisições
+10. 54.12.34.56          22156 requisições
+------------------------------------------------------------
+DISTRIBUIÇÃO DE CÓDIGOS DE STATUS
+------------------------------------------------------------
+200 OK           698295
+301 Moved        26144
+302 Found        13149
+400 Bad Req      17450
+403 Forbidden    13154
+404 Not Found    61168
+500 Internal     13028
+502 Bad Gateway  4379
+503 Unavail      4367
+Outros           48044
+------------------------------------------------------------
+ANÁLISE DE MÉTODOS HTTP
+------------------------------------------------------------
+GET        737685
+POST       107357
+PUT        26809
+DELETE     18035
+OUTROS     9292
+------------------------------------------------------------
+ANÁLISE DE USER-AGENT (Top 5)
+------------------------------------------------------------
+Chrome       491185
+Firefox      167222
+Safari       129608
+Edge         55444
+Outros       55719
+============================================================
+FIM DO RELATÓRIO
+============================================================
